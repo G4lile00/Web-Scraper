@@ -31,7 +31,7 @@ async function bot() {
 
   console.log("starting scrapping");
 
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 2000; i++) {
     let namestring = await page.$eval(
       "span.profile-header__name",
       (el) => el.innerText
@@ -50,10 +50,10 @@ async function bot() {
 
     write(info);
 
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(500);
   }
 
-  
+  await page.close()
 
 }
 
