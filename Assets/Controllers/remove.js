@@ -14,11 +14,11 @@ module.exports = function remove(name) {
     search(infoj, name)
     
     infoj.name.splice(index, 1) 
-    infoj.nickname.splice(index, 1)
+    // infoj.nickname.splice(index, 1)
     infoj.birth.splice(index, 1)
-    infoj.email.splice(index, 1)
-    infoj.phone.splice(index, 1)
-    infoj.insta.splice(index, 1)
+    // infoj.email.splice(index, 1)
+    // infoj.phone.splice(index, 1)
+    // infoj.insta.splice(index, 1)
 
     info = infoj
     }

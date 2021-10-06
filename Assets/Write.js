@@ -1,14 +1,7 @@
 const fs = require("fs");
 
-const add = require('./Controllers/add')
 
-const remove = require('./Controllers/remove')
-
-add()
-
-remove()
-
-function write(data) {
+module.exports = function write(data) {
   dataj = JSON.stringify(data);
 
   let stream = fs.createWriteStream("./Data/data.json");
@@ -20,4 +13,3 @@ function write(data) {
   });
 }
 
-write(info)
