@@ -1,13 +1,13 @@
 const puppeteer = require("puppeteer");
 
-const add = require("./Controllers/add");
+const add = require("./Add");
 
 const write = require("./Write");
 
-async function bot() {
+module.exports =  async function bot() {
   const url = "https://badoo.com/en-us/signin/?f=top";
 
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
 
   const page = await browser.newPage();
 
@@ -49,12 +49,14 @@ async function bot() {
     add(namestring.trim(), "", birthyear,"","","");
 
     write(info);
+    
+    console.log(`${namestring}, BirthDate:${birthyear}`)
 
-    await page.waitForTimeout(500);
+    await page.click('div[data-choice="no"]')
+
+    await page.waitForTimeout(1500);
   }
 
   await page.close()
 
 }
-
-bot();
