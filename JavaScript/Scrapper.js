@@ -4,7 +4,12 @@ const add = require("./Add");
 
 const write = require("./Write");
 
-module.exports =  async function bot() {
+const { PrismaClient } = require('@prisma/client')
+
+const prisma = new PrismaClient()
+
+
+module.exports = async function bot() {
   const url = "https://badoo.com/en-us/signin/?f=top";
 
   const browser = await puppeteer.launch({ headless: true });
@@ -45,12 +50,22 @@ module.exports =  async function bot() {
     let agestring = agestrings.replace(/^,|,$/g, "");
 
     let birthyear = 2021 - agestring;
+    
 
-    add(namestring.trim(), "", birthyear,"","","");
+    NameT = namestring.trim()
+    add(NameT, "", birthyear,"","","");
 
     write(info);
+
+    const post = await prisma.user.create({
+      data:{
+        Name: NameT,
+        Birth: birthyear
+      }
+
+    })
     
-    console.log(`${namestring}, BirthDate:${birthyear}`)
+    console.log(post)
 
     await page.click('div[data-choice="no"]')
 

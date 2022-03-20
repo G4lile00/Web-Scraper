@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@prisma/client": "^3.11.0",
     "fs": "^0.0.1-security",
     "puppeteer": "^10.4.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.11.0"
   }
 }
