@@ -4,6 +4,10 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
+const EMAIL = process.env.EMAIL;
+
+const PASS = process.env.PASS;
+
 module.exports = async function bot() {
   const url = `https://badoo.com/en-us/signin/?f=top`;
 
@@ -21,11 +25,11 @@ module.exports = async function bot() {
 
   await page.waitForSelector('button[name="post"]');
 
-  await page.type('input[name="email"]', "marcelinho.hd@gmail.com");
+  await page.type('input[name="email"]', EMAIL);
 
   await page.waitForTimeout(1000);
 
-  await page.type('input[name="password"]', "Vitor2609");
+  await page.type('input[name="password"]', PASS);
 
   await page.click('button[name="post"]');
 
