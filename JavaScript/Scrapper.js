@@ -53,7 +53,7 @@ module.exports = async function bot() {
     
 
     NameT = namestring.trim()
-    add(NameT, "", birthyear,"","","");
+    add(NameT, birthyear);
 
     write(info);
 
