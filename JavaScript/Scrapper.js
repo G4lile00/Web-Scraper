@@ -1,8 +1,5 @@
 const puppeteer = require("puppeteer");
 
-const add = require("./Add");
-
-const write = require("./Write");
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -53,9 +50,7 @@ module.exports = async function bot() {
     
 
     NameT = namestring.trim()
-    add(NameT, birthyear);
 
-    write(info);
 
     const post = await prisma.user.create({
       data:{
@@ -72,6 +67,7 @@ module.exports = async function bot() {
     await page.waitForTimeout(1500);
   }
 
-  await page.close()
+  await page.close();
 
+  console.log("Processa finished");
 }
