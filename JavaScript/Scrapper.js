@@ -1,17 +1,21 @@
 const puppeteer = require("puppeteer");
 
+const { PrismaClient } = require("@prisma/client");
 
-const { PrismaClient } = require('@prisma/client')
-
-const prisma = new PrismaClient()
-
+const prisma = new PrismaClient();
 
 module.exports = async function bot() {
-  const url = "https://badoo.com/en-us/signin/?f=top";
+  const url = `https://badoo.com/en-us/signin/?f=top`;
 
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+  });
 
   const page = await browser.newPage();
+
+  await page.setDefaultNavigationTimeout(0);
+
+  await page.setDefaultTimeout(0);
 
   await page.goto(url);
 
@@ -36,33 +40,30 @@ module.exports = async function bot() {
   for (i = 0; i < 20000; i++) {
     let namestring = await page.$eval(
       "span.profile-header__name",
-      (el) => el.innerText
+      (el) => el.innerText,
     );
 
     let agestrings = await page.$eval(
       "span.profile-header__age",
-      (el) => el.innerText
+      (el) => el.innerText,
     );
 
     let agestring = agestrings.replace(/^,|,$/g, "");
 
     let birthyear = 2021 - agestring;
-    
 
-    NameT = namestring.trim()
-
+    NameT = namestring.trim();
 
     const post = await prisma.user.create({
-      data:{
+      data: {
         Name: NameT,
-        Birth: birthyear
-      }
+        Birth: birthyear,
+      },
+    });
 
-    })
-    
-    console.log(post)
+    console.log(post);
 
-    await page.click('div[data-choice="no"]')
+    await page.click('div[data-choice="no"]');
 
     await page.waitForTimeout(1500);
   }
@@ -70,4 +71,4 @@ module.exports = async function bot() {
   await page.close();
 
   console.log("Processa finished");
-}
+};
