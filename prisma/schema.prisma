@@ -8,8 +8,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   Name  String
+  Bio   String
   Birth Int
+
 }

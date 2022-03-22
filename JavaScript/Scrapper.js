@@ -51,6 +51,16 @@ module.exports = async function bot() {
       "span.profile-header__age",
       (el) => el.innerText,
     );
+    try {
+      let biostring = await page.$eval(
+        "div.profile-section__txt.profile-section__txt--about",
+        (el) => el.innerText,
+      );
+      BioT = biostring.trim();
+    } catch (error) {
+      let biostring = "";
+      BioT = biostring;
+    }
 
     let agestring = agestrings.replace(/^,|,$/g, "");
 
@@ -58,9 +68,10 @@ module.exports = async function bot() {
 
     NameT = namestring.trim();
 
-    const post = await prisma.user.create({
+    const post = await prisma.users.create({
       data: {
         Name: NameT,
+        Bio: BioT,
         Birth: birthyear,
       },
     });
