@@ -41,7 +41,7 @@ module.exports = async function bot() {
 
   console.log("starting scrapping");
 
-  for (i = 0; i < 20000; i++) {
+  for (i = 0; i < 100000; i++) {
     let namestring = await page.$eval(
       "span.profile-header__name",
       (el) => el.innerText,
