@@ -1,4 +1,5 @@
 const search = require("./JavaScript/Searcher.js");
+const write = require("./JavaScript/Writer.js");
 
 const bios = [];
 const words = [];
@@ -19,6 +20,8 @@ async function searchs() {
 
 async function returns() {
   await searchs();
-  console.log(words);
+  const instagram = words.filter((word) => word.startsWith("@"));
+  write(instagram);
 }
+
 returns();
