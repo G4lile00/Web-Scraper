@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "@prisma/client": "^3.11.0",
+    "@prisma/client": "^3.13.0",
     "fs": "^0.0.1-security",
-    "prisma": "^3.11.0",
+    "prisma": "^3.13.0",
     "puppeteer": "^10.4.0"
   }
 }
